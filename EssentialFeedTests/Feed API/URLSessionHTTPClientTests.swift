@@ -21,14 +21,6 @@ class URLSessionHTTPClient {
 
 final class URLSessionHTTPClientTests: XCTestCase {
     
-    func test_getFromURL_createDataTaskWithURL() {
-        let url = URL(string: "https://any-url.com")!
-        let session = URLSessionSPy()
-        let sut = URLSessionHTTPClient(session: session)
-        sut.get(from: url)
-        XCTAssertEqual(session.receivedURLs, [url])
-    }
-    
     func test_getFromURL_resumesDataTaskWithURL() {
         let url = URL(string: "https://any-url.com")!
         let session = URLSessionSPy()
@@ -44,7 +36,6 @@ final class URLSessionHTTPClientTests: XCTestCase {
     //MARK: - Helpers
     
     private class URLSessionSPy: URLSession {
-        var receivedURLs = [URL]()
         private var stub = [URL: URLSessionDataTask]()
         
         func stub(url: URL, task: URLSessionDataTask) {
@@ -52,7 +43,6 @@ final class URLSessionHTTPClientTests: XCTestCase {
         }
         
         override func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-            receivedURLs.append(url)
             return stub[url] ?? FakeURLSessionDataTask()
         }
     }
