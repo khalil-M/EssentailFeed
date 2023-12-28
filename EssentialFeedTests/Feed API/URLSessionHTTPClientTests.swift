@@ -41,7 +41,8 @@ final class URLSessionHTTPClientTests: XCTestCase {
     }
     
     func test_getFromURL_perfomrmsGETRequestWithURL() {
-        let url = URL(string: "https://any-url.com")!
+        
+        let url = anyURL()
         
         let exp = expectation(description: "wait for request")
         
@@ -51,7 +52,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        makeSUT().get(from: url) { _ in }
+        makeSUT().get(from: anyURL()) { _ in }
         
         wait(for: [exp], timeout: 1.0)
         
@@ -59,14 +60,14 @@ final class URLSessionHTTPClientTests: XCTestCase {
     
     func test_getFromURL_failsOnRequestError() {
         // Register the stub in the URLLoadingSystem
-        let url = URL(string: "https://any-url.com")!
+        
         let error = NSError(domain: "any error", code: 1)
         URLProtocolStub.stub(data: nil, response: nil, error: error)
         
         let sut = makeSUT()
         
         let exp = expectation(description: "wait for completion")
-        sut.get(from: url) { result in
+        sut.get(from: anyURL()) { result in
             
             switch result {
             case let .failure(receivedError as NSError):
@@ -90,6 +91,10 @@ final class URLSessionHTTPClientTests: XCTestCase {
         return sut
     }
     
+    private func anyURL() -> URL {
+        let url = URL(string: "https://any-url.com")!
+        return url
+    }
     
     private class URLProtocolStub: URLProtocol {
         private static var stub: Stub?
