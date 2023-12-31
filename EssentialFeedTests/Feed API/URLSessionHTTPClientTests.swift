@@ -9,7 +9,7 @@ import XCTest
 import EssentialFeed
 
 
-class URLSessionHTTPClient {
+class URLSessionHTTPClient: HTTPClient {
     private let session: URLSession
     
     init(session: URLSession = .shared) {
@@ -45,23 +45,23 @@ final class URLSessionHTTPClientTests: XCTestCase {
         URLProtocolStub.stopInterceptingRequests()
     }
     
-    //    func test_getFromURL_perfomrmsGETRequestWithURL() {
-    //
-    //        let url = anyURL()
-    //
-    //        let exp = expectation(description: "wait for request")
-    //
-    //        URLProtocolStub.observeRequests { request in
-    //            XCTAssertEqual(request.url, url)
-    //            XCTAssertEqual(request.httpMethod, "GET")
-    //            exp.fulfill()
-    //        }
-    //
-    //        makeSUT().get(from: anyURL()) { _ in }
-    //
-    //        wait(for: [exp], timeout: 1.0)
-    //
-    //    }
+//    func test_getFromURL_perfomrmsGETRequestWithURL() {
+//        
+//        let url = anyURL()
+//        
+//        let exp = expectation(description: "wait for request")
+//        
+//        URLProtocolStub.observeRequests { request in
+//            XCTAssertEqual(request.url, url)
+//            XCTAssertEqual(request.httpMethod, "GET")
+//            exp.fulfill()
+//        }
+//        
+//        makeSUT().get(from: anyURL()) { _ in }
+//        
+//        wait(for: [exp], timeout: 1.0)
+//        
+//    }
     
     func test_getFromURL_failsOnRequestError() {
         // Register the stub in the URLLoadingSystem
@@ -120,7 +120,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
     //MARK: - Helpers
     
     private func makeSUT(file: StaticString = #filePath,
-                         line: UInt = #line) -> URLSessionHTTPClient {
+                         line: UInt = #line) -> HTTPClient {
         let sut = URLSessionHTTPClient()
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
