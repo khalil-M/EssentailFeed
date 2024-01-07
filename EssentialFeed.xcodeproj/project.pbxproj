@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE3208F02B4AD281005209B6 /* CacheFeeUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3208EF2B4AD281005209B6 /* CacheFeeUseCaseTests.swift */; };
 		CE5884ED2B2B7F7F0052195C /* EssentialFeed.docc in Sources */ = {isa = PBXBuildFile; fileRef = CE5884EC2B2B7F7F0052195C /* EssentialFeed.docc */; };
 		CE5884F32B2B7F7F0052195C /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5884E82B2B7F7F0052195C /* EssentialFeed.framework */; };
 		CE5884F92B2B7F7F0052195C /* EssentialFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = CE5884EB2B2B7F7F0052195C /* EssentialFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE3208EF2B4AD281005209B6 /* CacheFeeUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeeUseCaseTests.swift; sourceTree = "<group>"; };
 		CE5884E82B2B7F7F0052195C /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5884EB2B2B7F7F0052195C /* EssentialFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EssentialFeed.h; sourceTree = "<group>"; };
 		CE5884EC2B2B7F7F0052195C /* EssentialFeed.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = EssentialFeed.docc; sourceTree = "<group>"; };
@@ -107,6 +109,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE3208F12B4AD28B005209B6 /* Feed Cache */ = {
+			isa = PBXGroup;
+			children = (
+				CE3208EF2B4AD281005209B6 /* CacheFeeUseCaseTests.swift */,
+			);
+			path = "Feed Cache";
+			sourceTree = "<group>";
+		};
 		CE5884DE2B2B7F7F0052195C = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9D79122B39AF0F0034B04B /* Feed API */,
+				CE3208F12B4AD28B005209B6 /* Feed Cache */,
 			);
 			path = EssentialFeedTests;
 			sourceTree = "<group>";
@@ -386,6 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE628462B2CBBF000400AA8 /* RemoteFeedLoaderTests.swift in Sources */,
+				CE3208F02B4AD281005209B6 /* CacheFeeUseCaseTests.swift in Sources */,
 				CE9D79142B39DDDD0034B04B /* URLSessionHTTPClientTests.swift in Sources */,
 				CE66762A2B3DCDAA00DFDE2F /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
