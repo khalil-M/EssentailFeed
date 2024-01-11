@@ -65,6 +65,10 @@ class FeedStore {
     func completeInsertion(with error: Error, at index: Int = 0) {
         insertionCompletions[index](error)
     }
+    
+    func completeInsertionSuccessfuly(at index: Int = 0) {
+        insertionCompletions[index](nil)
+    }
 }
 class CacheFeeUseCaseTests: XCTestCase {
     
@@ -101,6 +105,24 @@ class CacheFeeUseCaseTests: XCTestCase {
         XCTAssertEqual(store.recievedMessages, [.deleteCachedFeed, .insert(items, timestamp)])
     }
     
+    func test_save_failsOnDeletionError() {
+        let items = [uniqueItem(), uniqueItem()]
+        let (sut, store) = makeSUT()
+        let deletionError = anyNSError()
+        let exp = expectation(description: "wait for save completion")
+        
+        var receivedError: Error?
+        sut.save(items) { error in
+            receivedError = error
+            exp.fulfill()
+        }
+        store.completeDeletion(with: deletionError)
+        wait(for: [exp], timeout: 1.0)
+        
+//        XCTAssertEqual(store.recievedMessages, [.deleteCachedFeed])
+        XCTAssertEqual(receivedError as! NSError, deletionError)
+    }
+    
     func test_save_failsOnInsertionError() {
         let items = [uniqueItem(), uniqueItem()]
         let (sut, store) = makeSUT()
@@ -120,10 +142,9 @@ class CacheFeeUseCaseTests: XCTestCase {
         XCTAssertEqual(receivedError as! NSError, insertionError)
     }
     
-    func test_save_failsOnDeletionError() {
+    func test_save_succeedsOnSuccessfulCacheInsertion() {
         let items = [uniqueItem(), uniqueItem()]
         let (sut, store) = makeSUT()
-        let deletionError = anyNSError()
         let exp = expectation(description: "wait for save completion")
         
         var receivedError: Error?
@@ -131,11 +152,12 @@ class CacheFeeUseCaseTests: XCTestCase {
             receivedError = error
             exp.fulfill()
         }
-        store.completeDeletion(with: deletionError)
+        store.completeDeletionSuccessfully()
+        store.completeInsertionSuccessfuly()
         wait(for: [exp], timeout: 1.0)
         
 //        XCTAssertEqual(store.recievedMessages, [.deleteCachedFeed])
-        XCTAssertEqual(receivedError as! NSError, deletionError)
+        XCTAssertNil(receivedError)
     }
     
     // MARK: - Helpers
