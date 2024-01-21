@@ -94,23 +94,7 @@ class CacheFeeUseCaseTests: XCTestCase {
         XCTAssertTrue(receivedResults.isEmpty)
     }
     
-    func test_deletesCacheOnRetrievalError() {
-        let (sut, store) = makeSUT()
-        
-        sut.load(completion: {_ in })
-        store.completeRetrieval(with: anyNSError())
-        
-        XCTAssertEqual(store.recievedMessages, [.retrieve, .deleteCachedFeed])
-    }
     
-    func test_doesNotDeletesCacheOnEmptyCache() {
-        let (sut, store) = makeSUT()
-        
-        sut.load(completion: {_ in })
-        store.completeRetrievalWithEmptyCache()
-        
-        XCTAssertEqual(store.recievedMessages, [.retrieve])
-    }
     
     // MARK: - Helpers
     
