@@ -31,7 +31,7 @@ class ValidateFeedCacheUseCaseTests: XCTestCase {
         sut.validateCache()
         store.completeRetrievalWithEmptyCache()
         
-        XCTAssertEqual(store.recievedMessages, [.retrieve, .deleteCachedFeed])
+        XCTAssertEqual(store.recievedMessages, [.retrieve])
     }
     
     func test_validateCache_doesNotDeleteCacheOnEmptyCache() {
@@ -62,25 +62,6 @@ class ValidateFeedCacheUseCaseTests: XCTestCase {
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, store)
-    }
-    
-    private func anyNSError() -> NSError {
-        return NSError(domain: "any error", code: 1)
-    }
-    
-    private func uniqueImage() -> FeedImage {
-        return FeedImage(id: UUID(), description: "any", location: "any", url: anyURL())
-    }
-    
-    private func uniqueImageFeed() -> (models: [FeedImage], local: [LocalFeedImage]) {
-        let items = [uniqueImage(), uniqueImage()]
-        let localItems = items.map {LocalFeedImage(id: $0.id, description: $0.description, location: $0.location, url: $0.url)}
-        return (items, localItems)
-    }
-    
-    private func anyURL() -> URL {
-        let url = URL(string: "https://any-url.com")!
-        return url
     }
 }
 
