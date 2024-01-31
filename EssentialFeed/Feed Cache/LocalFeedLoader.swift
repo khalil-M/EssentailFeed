@@ -40,9 +40,8 @@ public final class LocalFeedLoader {
                 completion(.failure(error))
             case let .found(feed: feed, timestamp) where self.validate(timestamp):
                 completion(.success(feed.toModels()))
-            case .found:
-                completion(.success([]))
-            case .empty:
+                //when the cache is invalid they do exactly the same
+            case .found, .empty:
                 completion(.success([]))
             }
         })
