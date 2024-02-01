@@ -7,15 +7,12 @@
 
 import Foundation
 
-public final class LocalFeedLoader {
+private final class FeedCachePolicy {
     
-    private let store: FeedStore
     private let currentDate: () -> Date
     private let calender = Calendar(identifier: .gregorian)
     
-    
-    public init(store: FeedStore, currentDate: @escaping () -> Date) {
-        self.store = store
+    init(currentDate: @escaping () -> Date) {
         self.currentDate = currentDate
     }
     
@@ -23,9 +20,23 @@ public final class LocalFeedLoader {
         return 7
     }
     
-    private func validate(_ timestamp: Date) -> Bool {
+    func validate(_ timestamp: Date) -> Bool {
         guard let maxCacheAge = calender.date(byAdding: .day, value: 7, to: timestamp) else { return  false }
         return currentDate() < maxCacheAge
+    }
+}
+
+public final class LocalFeedLoader {
+    
+    private let store: FeedStore
+    private let currentDate: () -> Date
+    private let cachePolicy: FeedCachePolicy
+    
+    
+    public init(store: FeedStore, currentDate: @escaping () -> Date) {
+        self.store = store
+        self.currentDate = currentDate
+        self.cachePolicy = FeedCachePolicy(currentDate: currentDate)
     }
 }
 
@@ -61,7 +72,7 @@ extension LocalFeedLoader: FeedLoader {
             switch result {
             case let .failure(error):
                 completion(.failure(error))
-            case let .found(feed: feed, timestamp) where self.validate(timestamp):
+            case let .found(feed: feed, timestamp) where self.cachePolicy.validate(timestamp):
                 completion(.success(feed.toModels()))
                 //when the cache is invalid they do exactly the same
             case .found, .empty:
@@ -80,7 +91,7 @@ extension LocalFeedLoader {
             case .failure:
                 self.store.deledCachedFeed(completion: {_ in})
                 
-            case let .found(feed: _, timestamp) where !self.validate(timestamp):
+            case let .found(feed: _, timestamp) where !self.cachePolicy.validate(timestamp):
                 self.store.deledCachedFeed(completion: {_ in})
                 
             case .empty, .found: break
