@@ -19,7 +19,7 @@ enum FeedCachePolicy {
     }
     
     static func validate(_ timestamp: Date, agains date: Date) -> Bool {
-        guard let maxCacheAge = calender.date(byAdding: .day, value: 7, to: timestamp) else { return  false }
+        guard let maxCacheAge = calender.date(byAdding: .day, value: maxCachedAgeIndays, to: timestamp) else { return  false }
         return date < maxCacheAge
     }
 }
