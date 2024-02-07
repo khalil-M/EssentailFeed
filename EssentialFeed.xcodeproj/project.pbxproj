@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0C12072B74208700B29A65 /* CodableFeedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C12062B74208700B29A65 /* CodableFeedStoreTests.swift */; };
 		CE11E1312B517AB000C13C6C /* LocalFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11E1302B517AB000C13C6C /* LocalFeedLoader.swift */; };
 		CE11E1342B517BEF00C13C6C /* FeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11E1332B517BEF00C13C6C /* FeedStore.swift */; };
 		CE3208F02B4AD281005209B6 /* CacheFeeUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3208EF2B4AD281005209B6 /* CacheFeeUseCaseTests.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE0C12062B74208700B29A65 /* CodableFeedStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFeedStoreTests.swift; sourceTree = "<group>"; };
 		CE11E1302B517AB000C13C6C /* LocalFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedLoader.swift; sourceTree = "<group>"; };
 		CE11E1332B517BEF00C13C6C /* FeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStore.swift; sourceTree = "<group>"; };
 		CE3208EF2B4AD281005209B6 /* CacheFeeUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeeUseCaseTests.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				CE3208EF2B4AD281005209B6 /* CacheFeeUseCaseTests.swift */,
 				CE4074962B56AC63006E01AC /* LoadFeedFromCacheUseCaseTests.swift */,
 				CEC1FA4D2B69B28A0089D823 /* ValidateFeedCacheUseCaseTests.swift */,
+				CE0C12062B74208700B29A65 /* CodableFeedStoreTests.swift */,
 			);
 			path = "Feed Cache";
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0C12072B74208700B29A65 /* CodableFeedStoreTests.swift in Sources */,
 				CEC1FA502B69C0EA0089D823 /* FeedCacheTestHelpers.swift in Sources */,
 				CEC1FA4E2B69B28A0089D823 /* ValidateFeedCacheUseCaseTests.swift in Sources */,
 				CEC1FA522B69C2FF0089D823 /* SharedTestHelper.swift in Sources */,
