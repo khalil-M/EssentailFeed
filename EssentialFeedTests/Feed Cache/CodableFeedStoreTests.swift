@@ -60,12 +60,22 @@ class CodableFeedStore {
     func insert(_ feed: [LocalFeedImage], timestamp: Date, completion: @escaping FeedStore.InsertionCompletion) {
         do {
             let encoder = JSONEncoder()
-            let cache = (Cache(feed: feed.map(CodableFeedImage.init), timestamp: timestamp))
-            let encoded = try! encoder.encode(cache)
+            let cache = Cache(feed: feed.map(CodableFeedImage.init), timestamp: timestamp)
+            let encoded = try encoder.encode(cache)
             try encoded.write(to: storeURL)
+            completion(nil)
         } catch {
             completion(error)
         }
+    }
+    
+    func deleteCachedFeed(completion: @escaping FeedStore.DeletionCompletion) {
+        guard FileManager.default.fileExists(atPath: storeURL.path) else {
+            return completion(nil)
+        }
+        
+        try! FileManager.default.removeItem(at: storeURL)
+        completion(nil)
     }
 }
 
@@ -158,6 +168,21 @@ class CodableFeedStoreTests: XCTestCase {
         XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
     }
     
+    func test_delete_emptiesPreviouslyInsertedCache() {
+        let sut = makeSUT()
+        insert((uniqueImageFeed().local, Date()), to: sut)
+        
+        let exp = expectation(description: "Wait for cache deletion")
+        sut.deleteCachedFeed { deletionError in
+            XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+        
+        expect(sut, toRetrieve: .empty)
+    }
+    
+    
     
     // - MARK: Helpers
     
@@ -169,7 +194,7 @@ class CodableFeedStoreTests: XCTestCase {
     
     @discardableResult
     private func insert(_ cache: (feed: [LocalFeedImage], timestamp: Date), to sut: CodableFeedStore) -> Error? {
-        let exp = expectation(description: "Wait for cache retrieval")
+        let exp = expectation(description: "Wait for cache insertion")
         var insertionError: Error?
         sut.insert(cache.feed, timestamp: cache.timestamp) { receivedInsertionError in
             insertionError = receivedInsertionError
@@ -186,11 +211,14 @@ class CodableFeedStoreTests: XCTestCase {
     }
     
     private func expect(_ sut: CodableFeedStore, toRetrieve expectedResult: RetrieveCacheFeedResult, file: StaticString = #file, line: UInt = #line) {
+        let exp = expectation(description: "Wait for cache retrieval")
         
         sut.retrieve { retrievedResult in
-            switch(expectedResult, retrievedResult) {
-            case (.empty, .empty), (.failure, .failure):
+            switch (expectedResult, retrievedResult) {
+            case (.empty, .empty),
+                (.failure, .failure):
                 break
+                
             case let (.found(expected), .found(retrieved)):
                 XCTAssertEqual(retrieved.feed, expected.feed, file: file, line: line)
                 XCTAssertEqual(retrieved.timestamp, expected.timestamp, file: file, line: line)
@@ -198,7 +226,11 @@ class CodableFeedStoreTests: XCTestCase {
             default:
                 XCTFail("Expected to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
             }
+            
+            exp.fulfill()
         }
+        
+        wait(for: [exp], timeout: 1.0)
     }
     
     
