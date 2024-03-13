@@ -158,16 +158,8 @@
 		CE3208F12B4AD28B005209B6 /* Feed Cache */ = {
 			isa = PBXGroup;
 			children = (
+				CE6262262BA2572800969C43 /* FeedStoreSpecs */,
 				CE40749A2B56AF87006E01AC /* Helpers */,
-				CE3208EF2B4AD281005209B6 /* CacheFeeUseCaseTests.swift */,
-				CE4074962B56AC63006E01AC /* LoadFeedFromCacheUseCaseTests.swift */,
-				CEC1FA4D2B69B28A0089D823 /* ValidateFeedCacheUseCaseTests.swift */,
-				CE0C12062B74208700B29A65 /* CodableFeedStoreTests.swift */,
-				CE6262202BA2531E00969C43 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift */,
-				CE6262242BA2566900969C43 /* XCTestCase+FailableDeleteFeedStoreSpecs.swift */,
-				CE6262222BA253E200969C43 /* XCTestCase+FailableInsertFeedStoreSpecs.swift */,
-				CEBBB7712B9F0E160005B48F /* XCTestCase+FeedStoreSpecs.swift */,
-				CEBBB76F2B9F0CB90005B48F /* FeedStoreSpecs.swift */,
 			);
 			path = "Feed Cache";
 			sourceTree = "<group>";
@@ -221,6 +213,10 @@
 			isa = PBXGroup;
 			children = (
 				CE66762B2B3DCDB100DFDE2F /* Helpers */,
+				CE3208EF2B4AD281005209B6 /* CacheFeeUseCaseTests.swift */,
+				CE0C12062B74208700B29A65 /* CodableFeedStoreTests.swift */,
+				CE4074962B56AC63006E01AC /* LoadFeedFromCacheUseCaseTests.swift */,
+				CEC1FA4D2B69B28A0089D823 /* ValidateFeedCacheUseCaseTests.swift */,
 				CE9D79122B39AF0F0034B04B /* Feed API */,
 				CE3208F12B4AD28B005209B6 /* Feed Cache */,
 			);
@@ -246,6 +242,18 @@
 				CE639D6E2B4173B900B70ABA /* URLSessionHTTPClient.swift */,
 			);
 			path = "Feed API";
+			sourceTree = "<group>";
+		};
+		CE6262262BA2572800969C43 /* FeedStoreSpecs */ = {
+			isa = PBXGroup;
+			children = (
+				CEBBB76F2B9F0CB90005B48F /* FeedStoreSpecs.swift */,
+				CE6262202BA2531E00969C43 /* XCTestCase+FailableRetrieveFeedStoreSpecs.swift */,
+				CE6262242BA2566900969C43 /* XCTestCase+FailableDeleteFeedStoreSpecs.swift */,
+				CE6262222BA253E200969C43 /* XCTestCase+FailableInsertFeedStoreSpecs.swift */,
+				CEBBB7712B9F0E160005B48F /* XCTestCase+FeedStoreSpecs.swift */,
+			);
+			path = FeedStoreSpecs;
 			sourceTree = "<group>";
 		};
 		CE639D772B418D6100B70ABA /* EssentialFeedAPIEndToEndTests */ = {
