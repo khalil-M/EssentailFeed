@@ -22,8 +22,11 @@ public struct CachedFeed {
 }
 
 public protocol FeedStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
+    typealias DeletionResult = Error?
+    typealias DeletionCompletion = (DeletionResult) -> Void
+    
+    typealias InesrtionResult = Error?
+    typealias InsertionCompletion = (InesrtionResult) -> Void
     
     typealias RetrievalResult = Swift.Result<CachedFeed?, Error>
     typealias RetrievalCompletions = (RetrievalResult) -> Void
