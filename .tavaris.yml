@@ -1,4 +1,6 @@
 os: osx
 osx_image: xcode15.3
 language: Swift
-script: xcodebuild lean build test -project EssentialFeed/EssentialFeed.xcodeproj -scheme "CI" CODE_SIGN_IDENTITY="" CODE_SIGNIN_REQUIRED=NO
+script: 
+        -xcodebuild lean build test -project EssentialFeed/EssentialFeed.xcodeproj -scheme "CI_macOS" CODE_SIGN_IDENTITY="" CODE_SIGNIN_REQUIRED=NO
+        -xcodebuild lean build test -project EssentialFeed/EssentialFeed.xcodeproj -scheme "CI_iOS" CODE_SIGN_IDENTITY="" CODE_SIGNIN_REQUIRED=NO      
