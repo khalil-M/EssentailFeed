@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE04E0AD2CC2E71E00488E6E /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5884E82B2B7F7F0052195C /* EssentialFeed.framework */; platformFilter = ios; };
+		CE04E0AE2CC2E71E00488E6E /* EssentialFeed.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CE5884E82B2B7F7F0052195C /* EssentialFeed.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE04E0B32CC2E95500488E6E /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04E0B22CC2E95500488E6E /* UIView+Shimmering.swift */; };
 		CE0C0E082BB6EA2B00BD16CA /* CoreDataFeedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C0E072BB6EA2B00BD16CA /* CoreDataFeedStoreTests.swift */; };
 		CE0C0E0A2BB6EF7800BD16CA /* CoreDataFeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C0E092BB6EF7800BD16CA /* CoreDataFeedStore.swift */; };
 		CE0C0E0D2BB6F56E00BD16CA /* FeedStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE0C0E0B2BB6F56E00BD16CA /* FeedStore.xcdatamodeld */; };
@@ -47,7 +50,6 @@
 		CE77A5D82B387A3400AE9985 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77A5D72B387A3400AE9985 /* HTTPClient.swift */; };
 		CE77A5DA2B387AB400AE9985 /* FeedItemsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77A5D92B387AB400AE9985 /* FeedItemsMapper.swift */; };
 		CE78C8432C9B66A200A3E1D4 /* FeedViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE78C8422C9B66A200A3E1D4 /* FeedViewControllerTests.swift */; };
-		CE78C8452C9B6DE100A3E1D4 /* EssentialFeediOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE51DEE2C39F81200DC4BA6 /* EssentialFeediOS.framework */; platformFilter = ios; };
 		CE78C8462C9B700400A3E1D4 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6676292B3DCDAA00DFDE2F /* XCTestCase+MemoryLeakTracking.swift */; };
 		CE9D79142B39DDDD0034B04B /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9D79132B39DDDD0034B04B /* URLSessionHTTPClientTests.swift */; };
 		CEB3FD3D2B92924C00A15CA8 /* CodableFeedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB3FD3C2B92924C00A15CA8 /* CodableFeedStore.swift */; };
@@ -62,6 +64,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CE04E0AF2CC2E71E00488E6E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE5884DF2B2B7F7F0052195C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE5884E72B2B7F7F0052195C;
+			remoteInfo = EssentialFeed;
+		};
 		CE5884F42B2B7F7F0052195C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE5884DF2B2B7F7F0052195C /* Project object */;
@@ -99,7 +108,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CE04E0B12CC2E71E00488E6E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE04E0AE2CC2E71E00488E6E /* EssentialFeed.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		CE04E0B22CC2E95500488E6E /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
 		CE0C0E072BB6EA2B00BD16CA /* CoreDataFeedStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFeedStoreTests.swift; sourceTree = "<group>"; };
 		CE0C0E092BB6EF7800BD16CA /* CoreDataFeedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFeedStore.swift; sourceTree = "<group>"; };
 		CE0C0E0C2BB6F56E00BD16CA /* FeedStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FeedStore.xcdatamodel; sourceTree = "<group>"; };
@@ -160,7 +184,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE78C8452C9B6DE100A3E1D4 /* EssentialFeediOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE04E0AD2CC2E71E00488E6E /* EssentialFeed.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +445,7 @@
 			children = (
 				CE757DF42CB2040F00AF637B /* FeedViewController.swift */,
 				CE6A54F82CB32AB100F873F0 /* FeedImageCell.swift */,
+				CE04E0B22CC2E95500488E6E /* UIView+Shimmering.swift */,
 			);
 			path = EssentialFeediOS;
 			sourceTree = "<group>";
@@ -552,10 +577,12 @@
 				CEE51DEA2C39F81200DC4BA6 /* Sources */,
 				CEE51DEB2C39F81200DC4BA6 /* Frameworks */,
 				CEE51DEC2C39F81200DC4BA6 /* Resources */,
+				CE04E0B12CC2E71E00488E6E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CE04E0B02CC2E71E00488E6E /* PBXTargetDependency */,
 			);
 			name = EssentialFeediOS;
 			productName = EssentialFeediOS;
@@ -772,6 +799,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE04E0B32CC2E95500488E6E /* UIView+Shimmering.swift in Sources */,
 				CE757DF52CB2040F00AF637B /* FeedViewController.swift in Sources */,
 				CE6A54F92CB32AB100F873F0 /* FeedImageCell.swift in Sources */,
 			);
@@ -789,6 +817,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CE04E0B02CC2E71E00488E6E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = CE5884E72B2B7F7F0052195C /* EssentialFeed */;
+			targetProxy = CE04E0AF2CC2E71E00488E6E /* PBXContainerItemProxy */;
+		};
 		CE5884F52B2B7F7F0052195C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE5884E72B2B7F7F0052195C /* EssentialFeed */;
