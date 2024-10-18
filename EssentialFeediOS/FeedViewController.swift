@@ -36,7 +36,7 @@ final public class FeedViewController: UITableViewController, UITableViewDataSou
         refreshControl = FakeRefreshControll()
         refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
         tableView.prefetchDataSource = self
-//        refreshControl?.beginRefreshing()
+        //        refreshControl?.beginRefreshing()
         load()
     }
     
@@ -74,7 +74,7 @@ final public class FeedViewController: UITableViewController, UITableViewDataSou
         cell.feedImageRetryButton.isHidden = true
         cell.feedImageContainer.startShimmering()
         
-//        cell.feedImageRetryButton there's no way to know when this button is invoked so ideally we         should have a callback
+        //        cell.feedImageRetryButton there's no way to know when this button is invoked so ideally we         should have a callback
         
         let loadImage = { [weak self, weak cell] in
             guard let self = self else { return }
@@ -93,17 +93,26 @@ final public class FeedViewController: UITableViewController, UITableViewDataSou
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        tasks[indexPath]?.cancel()
-        tasks[indexPath] = nil
-//        let cellModel = tableModel[indexPath.row]
-//        imageLoader?.cancelImageDataLoad(from: cellModel.url)
+        cancelTask(forRowAt: indexPath)
+        //        let cellModel = tableModel[indexPath.row]
+        //        imageLoader?.cancelImageDataLoad(from: cellModel.url)
     }
     
     public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach { indexPath in
             let cellModel = tableModel[indexPath.row]
-            _ = imageLoader?.loadImageData(from: cellModel.url) { _ in }
+            tasks[indexPath] = imageLoader?.loadImageData(from: cellModel.url) { _ in }
         }
+    }
+    
+    public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach(cancelTask)
+        
+    } 
+    
+    private func cancelTask(forRowAt indexPath: IndexPath) {
+        tasks[indexPath]?.cancel()
+        tasks[indexPath] = nil
     }
 }
 
