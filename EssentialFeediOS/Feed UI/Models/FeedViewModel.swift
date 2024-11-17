@@ -8,6 +8,7 @@
 import EssentialFeed
 
 final class FeedViewModel {
+    typealias Observer<T> = (T) -> Void
     //since the viewModel manage the feedLoading state
     
     private let feedLoader: FeedLoader
@@ -27,26 +28,27 @@ final class FeedViewModel {
 //    }
     
     //normally using combine or RxSwift we can use a simple closure
-    var onChange: ((FeedViewModel) -> Void)?
-    var onFeedLoad: (([FeedImage])->Void)?
+//    var onChange: ((FeedViewModel) -> Void)?
+    var onLoadingStateChange: Observer<Bool>?
+    var onFeedLoad: Observer<[FeedImage]>?
     
     //but since the state is private we need to expode access for the current state of the viewModel
     
-    private (set) var isLoading: Bool = false {
-        didSet { onChange?(self)}
-    }
+//    private (set) var isLoading: Bool = false {
+//        didSet { onChange?(self)}
+//    }
     
     
     func loadFeed() {
         //define the state transition
 //        state = .loading
-        isLoading = true
+        onLoadingStateChange?(true)
         feedLoader.load { [weak self] result in
             if let feed = try? result.get() {
                 //                self?.state = .loaded(feed)
                 self?.onFeedLoad?(feed)
             }
-            self?.isLoading = false
+            self?.onLoadingStateChange?(false)
             
         }
     }
