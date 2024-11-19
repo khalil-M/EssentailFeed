@@ -27,8 +27,8 @@ final public class FeedViewController: UITableViewController, UITableViewDataSou
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        refreshControl = refreshController?.view
         tableView.prefetchDataSource = self
+        refreshControl = refreshController?.view
         refreshController?.refresh()
     }
     
@@ -67,8 +67,7 @@ final public class FeedViewController: UITableViewController, UITableViewDataSou
     
     public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach(cancelCellControllerLoad)
-        
-    } 
+    }
     
     private func cellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
 //        let cellModel = tableModel[indexPath.row]
