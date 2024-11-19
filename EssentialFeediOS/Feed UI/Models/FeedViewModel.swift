@@ -6,6 +6,7 @@
 //
 
 import EssentialFeed
+import UIKit
 
 final class FeedViewModel {
     typealias Observer<T> = (T) -> Void
