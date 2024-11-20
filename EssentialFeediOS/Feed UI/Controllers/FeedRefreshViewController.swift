@@ -10,18 +10,22 @@ import UIKit
 final class FeedRefreshViewController: NSObject, FeedLoadingView {
     private(set) lazy var view = loadView()
     
+    // since the controller needs the presenter to invoke loadFeed method
+    // we can just pass an abstract interface instead of reference to the presenter
+    // by passing closure handler
+    
     
 //    private let feedLoader: FeedLoader
-    private let presenter: FeedPresenter
+    private let loadFeed: () -> Void
     
-    init(presenter: FeedPresenter) {
-        self.presenter = presenter
+    init(loadFeed: @escaping () -> Void) {
+        self.loadFeed = loadFeed
     }
     
     
 
     @objc func refresh() {
-        presenter.loadFeed()
+        loadFeed()
     }
     
     
