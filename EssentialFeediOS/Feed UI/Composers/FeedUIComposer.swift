@@ -15,7 +15,7 @@ public final class FeedUIComposer {
     public static func feedComposedWith(feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) -> FeedViewController {
         let presenter = FeedPresenter()
         let presentationAdapter = FeedLoaderPresentationAdapter(feedLoader: feedLoader, presenter: presenter)
-        let refreshController = FeedRefreshViewController(loadFeed: presentationAdapter.loadFeed)
+        let refreshController = FeedRefreshViewController(delegate: presentationAdapter)
         let feedController = FeedViewController(refreshController: refreshController)
         presenter.loadingView = WeakRefVirtualProxy(object: refreshController)
         presenter.feedView = FeedViewAdapter(controller: feedController, imageLoader: imageLoader)
@@ -65,7 +65,7 @@ private final class FeedViewAdapter: FeedView {
     }
 }
 
-private final class FeedLoaderPresentationAdapter {
+private final class FeedLoaderPresentationAdapter: FeedRefreshViewControllerDelegate {
     private let feedLoader: FeedLoader
     private let presenter: FeedPresenter
     
@@ -74,17 +74,18 @@ private final class FeedLoaderPresentationAdapter {
         self.presenter = presenter
     }
     
-        func loadFeed() {
-            presenter.didStartLoadingFeed()
-            feedLoader.load { [weak self] result in
-                switch result {
-                case let .success(feed):
-                    self?.presenter.didFinshLoadingFeed(with: feed)
-                    
-                case let .failure(error):
-                    self?.presenter.didFinshLoadingFeed(with: error)
-                }
-    
+    func didRequestFeedRefresh() {
+        presenter.didStartLoadingFeed()
+        feedLoader.load { [weak self] result in
+            switch result {
+            case let .success(feed):
+                self?.presenter.didFinshLoadingFeed(with: feed)
+                
+            case let .failure(error):
+                self?.presenter.didFinshLoadingFeed(with: error)
             }
+            
         }
+    }
+    
 }
