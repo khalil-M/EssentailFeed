@@ -27,28 +27,37 @@ protocol FeedView {
 
 final class FeedPresenter {
     typealias Observer<T> = (T) -> Void
-    //since the viewModel manage the feedLoading state
+    // since we don't have a reference to the the feedLoader we need a way to know when the
+    // loading begins and ends
     
-    private let feedLoader: FeedLoader
-    
-    init(feedLoader: FeedLoader) {
-        self.feedLoader = feedLoader
+    func didStartLoadingFeed() {
+        loadingView?.display(FeedLoadingViewModel(isLoading: true))
     }
+    
+    func didFinshLoadingFeed(with feed: [FeedImage]) {
+        feedView?.display(FeedViewModel(feed: feed))
+        loadingView?.display(FeedLoadingViewModel(isLoading: false))
+    }
+    
+    func didFinshLoadingFeed(with error: Error) {
+        loadingView?.display(FeedLoadingViewModel(isLoading: false))
+    }
+    
     
     var feedView: FeedView?
     var loadingView: FeedLoadingView?
 
-    func loadFeed() {
-        //define the state transition
-//        state = .loading
-        loadingView?.display(FeedLoadingViewModel(isLoading: true))
-        feedLoader.load { [weak self] result in
-            if let feed = try? result.get() {
-                //                self?.state = .loaded(feed)
-                self?.feedView?.display(FeedViewModel(feed: feed))
-            }
-            self?.loadingView?.display(FeedLoadingViewModel(isLoading: false))
-            
-        }
-    }
+//    func loadFeed() {
+//        //define the state transition
+////        state = .loading
+//        loadingView?.display(FeedLoadingViewModel(isLoading: true))
+//        feedLoader.load { [weak self] result in
+//            if let feed = try? result.get() {
+//                //                self?.state = .loaded(feed)
+//                self?.feedView?.display(FeedViewModel(feed: feed))
+//            }
+//            self?.loadingView?.display(FeedLoadingViewModel(isLoading: false))
+//            
+//        }
+//    }
 }
