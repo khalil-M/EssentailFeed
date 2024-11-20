@@ -8,7 +8,7 @@
 import EssentialFeed
 
 // 1 reference to the view
-protocol FeedLoadingView: class {
+protocol FeedLoadingView {
     // 2 we need a way to notify
     func display(isLoading: Bool)
 }
@@ -28,7 +28,7 @@ final class FeedPresenter {
     }
     
     var feedView: FeedView?
-    weak var loadingView: FeedLoadingView?
+    var loadingView: FeedLoadingView?
 
     func loadFeed() {
         //define the state transition
